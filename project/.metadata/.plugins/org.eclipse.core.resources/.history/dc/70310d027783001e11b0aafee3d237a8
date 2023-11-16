@@ -1,0 +1,5 @@
+package com.project.shop.exception;
+
+public class OutOfStockException {
+
+}

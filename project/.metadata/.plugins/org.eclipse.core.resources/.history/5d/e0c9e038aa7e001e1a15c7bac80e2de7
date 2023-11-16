@@ -1,0 +1,12 @@
+package com.project.shop.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MainController {
+
+	@GetMapping(value="/")
+	public String main() {
+		return "main";
+	}
+}

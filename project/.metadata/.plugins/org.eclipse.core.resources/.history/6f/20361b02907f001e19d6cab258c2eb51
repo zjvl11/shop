@@ -1,0 +1,5 @@
+package com.project.shop.config;
+
+public class CustomAuthenticationEntryPoint {
+
+}

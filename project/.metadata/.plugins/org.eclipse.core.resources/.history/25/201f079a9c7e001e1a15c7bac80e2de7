@@ -1,0 +1,46 @@
+package com.project.shop.service;
+
+import java.text.SimpleDateFormat;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.project.shop.domain.MemberFormDTO;
+import com.project.shop.entity.Member;
+
+@SpringBootTest
+@Transactional
+public class MemberServiceTest {
+
+	@Autowired
+	MemberService memberService;
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
+	public Member createMember() {
+		MemberFormDTO memberFormDto = new MemberFormDTO();
+		memberFormDto.setId("abcd1");
+		memberFormDto.setPassword("1234");
+		memberFormDto.setName("김철수");
+		memberFormDto.setEmail("abcd1@naver.com");
+		memberFormDto.setGender("m");
+		memberFormDto.setMobile("010-1234-1234");
+		memberFormDto.setPhone("02-777-8888");
+		memberFormDto.setZip("08290");
+		memberFormDto.setAddress1("서울 구로구 공원로 83 (구로동)");
+		memberFormDto.setAddress2("이젠아카데미 신도림점");
+		memberFormDto.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("2001-11-30"));
+		memberFormDto.setJoindate(new SimpleDateFormat("yyyy-MM-dd").parse("2018-11-30"));
+		
+		return Member.createMember(memberFormDto, passwordEncoder);
+	}
+	
+	
+	@Test
+	@DisplayName("회원가입 테스트")
+	public void saveMeberTest() {
+		Member member = createMember();
+	}
+}

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.input-group {
+	margin-bottom : 15px;
+}
+
+.img-div {
+	margin-bottom : 10px;
+}
+
+.fieldError {
+	color : #bd2130;
+}

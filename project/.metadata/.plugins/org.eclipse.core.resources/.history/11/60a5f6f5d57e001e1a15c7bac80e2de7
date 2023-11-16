@@ -1,0 +1,56 @@
+# server
+server.port=8082
+#server.servlet.context-path=/shop
+
+# devtools build automation
+spring.devtools.livereload.enabled=true
+spring.devtools.restart.enabled=true
+
+
+# logging
+logging.level.=info
+# logging.level.org.springframework.web=debug
+
+debug=true
+logging.config=classpath:log4j2.xml
+
+
+# thymeleaf setting
+spring.thymeleaf.cache=false
+
+
+# Encoding
+server.servlet.encoding.charset=UTF-8
+server.servlet.encoding.enabled=true
+server.servlet.encoding.force=true
+
+
+# JDBC & log4JDBC
+
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin@localhost:1521:XE
+spring.datasource.username=shop
+spring.datasource.password=shop
+
+
+# JPA & Security
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.generate-ddl=true
+spring.jpa.show-sql=true
+spring.jpa.database=oracle
+spring.jpa.database-platform=org.hibernate.dialect.Oracle12cDialect
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.format_sql=true
+logging.level.org.hibernate.typr.descriptor.sql=trace
+
+
+# HikariCP & log4JDBC
+
+spring.datasource.hikari.pool-name=hikariCP
+spring.datasource.hikari.driver-class-name=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+spring.datasource.hikari.jdbc-url=jdbc:log4jdbc:oracle:thin:@localhost:1521:XE
+spring.datasource.hikari.username=shop
+spring.datasource.hikari.password=shop
+
+# MUSTACHE
+spring.mustache.expose-request-attributes=true

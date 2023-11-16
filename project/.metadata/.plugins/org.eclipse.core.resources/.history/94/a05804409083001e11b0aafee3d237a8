@@ -1,0 +1,35 @@
+package com.project.shop.service;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.project.shop.domain.CartItemDTO;
+import com.project.shop.entity.Cart;
+import com.project.shop.entity.Item;
+import com.project.shop.entity.Member;
+import com.project.shop.repository.CartItemRepository;
+import com.project.shop.repository.CartRepository;
+import com.project.shop.repository.ItemRepository;
+import com.project.shop.repository.MemberRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class CartService {
+
+	private final ItemRepository itemRepository;
+	private final MemberRepository memberRepository;
+	private final CartRepository cartRepository;
+	private final CartItemRepository cartItemRepository;
+	
+	public Long addCart(CartItemDTO cartItemDto, String email) {
+		Item item = itemRepository.findById(cartItemDto.getItemId()).orElseThrow(EntityNotFoundException::new);
+		Member member = memberRepository.findByEmail(email);
+		
+		Cart cart = cartRepository.findByMemberId(member.getId());
+	}
+}

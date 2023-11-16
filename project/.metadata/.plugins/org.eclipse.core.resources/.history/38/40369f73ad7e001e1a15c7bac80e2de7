@@ -1,0 +1,71 @@
+package com.project.shop.domain;
+
+import java.util.Date;
+
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class MemberFormDTO {
+
+	/** 회원 아이디*/
+	private Long Memberid;
+	
+	/** 회원 아이디*/
+	@NotBlank(message="아이디는 필수 입력 값입니다.")
+	private String id;
+	
+	/** 회원 비밀번호*/
+	@NotBlank(message="비밀번호는 필수 입력 값입니다.")
+	private String password;
+	
+	/** 회원 이름*/
+	@NotBlank(message="이름은 필수 입력 값입니다.")
+	private String name;
+	
+	/** 회원 이메일*/
+	@NotBlank(message="이메일은 필수 입력 값입니다.")
+	private String email;
+	
+	/** 회원 성별*/
+	@NotBlank(message="성별 필수 입력 값입니다.")
+	private String gender;
+	
+	/** 회원 휴대폰번호*/
+	@NotBlank(message="휴대전화는 필수 입력 값입니다.")
+	private String mobile;
+	
+	/** 회원 지역전화*/
+	private String phone;
+	
+	/** 회원 우편번호*/
+	@NotBlank(message="우편번호는 필수 입력 값입니다.")
+	private String zip;
+	
+	/** 회원 도로명 주소*/
+	@NotBlank(message="도로명 주소는 필수 입력 값입니다.")
+	private String address1;
+	
+	/** 회원 상세 주소*/
+	@NotBlank(message="상세 주소는 필수 입력 값입니다.")
+	private String address2;
+	
+	/** 회원 생일*/
+	@NotBlank(message="생일은 필수 입력 값입니다.")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date birthday;
+	
+	/** 회원 가입 날짜*/
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date joindate;
+	
+//	/** 회원 활성화*/
+//	private int enabled;
+
+
+}

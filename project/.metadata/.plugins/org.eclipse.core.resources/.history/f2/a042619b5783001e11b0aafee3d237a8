@@ -1,0 +1,63 @@
+package com.project.shop.service;
+
+import javax.persistence.EntityNotFoundException;
+
+import org.apache.groovy.parser.antlr4.util.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.project.shop.entity.ItemImg;
+import com.project.shop.repository.ItemImgRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class ItemImgService {
+
+	@Value("${itemImgLocation}") //@Value어노테이션을 통해 application.properties파일에 등록한 itemImgLocation 값을 불러와서 itemImgLocation변수에 넣어 준다
+	private String itemImgLocation;
+	
+	private final ItemImgRepository itemImgRepository;
+	
+	private final FileService fileService;
+	
+	public void saveItemImg(ItemImg itemImg, MultipartFile itemImgFile) throws Exception{
+		String orgImgName = itemImgFile.getOriginalFilename();
+		String imgName = "";
+		String imgUrl = "";
+		
+		//파일 업로드
+		if(!StringUtils.isEmpty(orgImgName)) {
+			//사용자가 상품의 이미지를 등록했다면 저장할 경로와 파일의 이름, 파일을 파일의 바이트 배열을 파일 업로드 파라미터로 uploadFile메소드를 호출, 호출 결과 로컬에 저장된 파일의 이름을 imgName변수에 저장한다.
+			imgName = fileService.uploadFile(itemImgLocation,  orgImgName, itemImgFile.getBytes()); 
+			//저장한 상품 이미지를 불러올 경로를 설정. 외부 리소스를 불러오는 urlPatterns로 WebMvcConfig클래스에서 "/image/**"를 설정함
+			//application.properties에서 설정한 uploadPath프로퍼티 경로에서 item 폴더에 이미지를 저장하므로 상품 이미지를 불러오는 경로로 "/images/item/"을 붙여준다
+			imgUrl = "/images/item" + imgName;
+		}
+		
+		//상품 이미지 정보 저장
+		itemImg.updateItemImg(orgImgName, imgName, imgUrl);
+		itemImgRepository.save(itemImg);
+	}
+	
+	
+	
+	//상품 이미지 데이터 수정
+	public void updateItemImg(Long itemImgId, MultipartFile itemImgFile) throws Exception{
+		if(!itemImgFile.isEmpty()) {
+			ItemImg savedItemImg = itemImgRepository.findById(itemImgId).orElseThrow(EntityNotFoundException::new);
+			
+			//기존 이미지 파일 삭제
+			if(!StringUtils.isEmpty(savedItemImg.getImgName())) {
+				fileService.deleteFile(itemImgLocation+"/"+savedItemImg.getImgName());
+			}
+			
+			String orgImgName = itemImgFile.getOriginalFilename();
+			String imgName = fileService.uploadFile(itemImgLocation, orgImgName, itemImgFile.getBytes());
+		}
+	}
+}

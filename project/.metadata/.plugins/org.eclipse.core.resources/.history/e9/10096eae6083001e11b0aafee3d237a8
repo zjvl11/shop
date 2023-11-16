@@ -1,0 +1,5 @@
+package com.project.shop.repository;
+
+public class ItemRepositoryCustomImpl {
+
+}

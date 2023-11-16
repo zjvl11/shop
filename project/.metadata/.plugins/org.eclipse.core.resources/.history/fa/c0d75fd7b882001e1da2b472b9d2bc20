@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}" lang="ko-kr">
+
+<!-- 사용자 스크립트 -->
+<script th:src="@{'/js/item_form.js'}"></script>
+
+<link th:href="@{/css/item_form.css}" rel="stylesheet">
+
+
+<div layout:fragment="content">
+
+	<h1>상품등록 페이지입니다.</h1>
+	
+</div>
+
+
+</html>

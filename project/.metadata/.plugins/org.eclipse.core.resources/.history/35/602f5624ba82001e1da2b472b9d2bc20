@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout1}" lang="ko-kr">
+
+<!-- 사용자 스크립트 -->
+<script th:src="@{'/js/item_form.js'}"></script>
+
+<link th:href="@{/css/item_form.css}" rel="stylesheet">
+
+
+<div layout:fragment="content">
+
+	<form role="form" method="post" enctype="multipart/form-data" th:object="${itemFormDTO}"></form>
+	
+		<p class="h2">
+			상품 등록
+		</p>
+		
+		<input type="hidden" th:field="*{id}">
+	
+		<div class="form-group">
+			<select th:field="*{itemSellStatus}" class="custom-select">
+				<option value="SELL">판매중</option>
+				<option value="SOLD_OUT">품절</option>
+			</select>
+		
+		</div>
+		
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input=group-text">상품명</span>
+			</div>
+			<input type="text" th:field="*{itemName}" class="form=control" placeholder="상품명을 입력해주세요">
+			
+		</div>
+		<p th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}" class="fieldError">Incorrect data</p>
+
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">가격</div>
+			</div>
+			<input type="number" th:field="*{price}" class="form-control" placeholder="상품의 가격을 입력하십시오">
+		</div>
+		<p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="fieldError">Incorrect data</p>
+		
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">재고</div>
+			</div>
+			<input type="number" th:field="*{stockNumber}" class="form-control" placeholder="상품의 재고을 입력하십시오">
+		</div>
+		<p th:if="${#fields.hasErrors('stockNumber')}" th:errors="*{stockNumber}" class="fieldError">Incorrect data</p>
+		
+		
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<div class="input-group-text">상품 상세 내용</div>
+			</div>
+			<textarea class="form-control" aria-label="With textarea" th:field="*{itemDetail}"></textarea>
+		</div>
+		<p th:if="${#fields.hasErrors('itemDetail')}" th:errors="*{itemDetail}" class="fieldError">Incorrect data</p>
+		
+		
+		<div th:if="${#lists.isEmpty(itemFormDTO.itemTmgDTOList)}">
+			<div class="form-group" th:each="num: ${#numbers.sequence(1, 5}">
+				<div class="custom-file img-div">
+					<input type="file" class="custom-file-input" name="itemImgFile">
+					<label class="custom-file-label" th:text="상품이미지 + ${num}"></label>
+				</div>
+			</div>
+		</div>
+
+
+
+</div>
+
+
+</html>

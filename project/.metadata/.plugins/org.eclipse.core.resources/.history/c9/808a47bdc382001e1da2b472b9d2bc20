@@ -1,0 +1,5 @@
+package com.project.shop.service;
+
+public class ItemImgService {
+
+}

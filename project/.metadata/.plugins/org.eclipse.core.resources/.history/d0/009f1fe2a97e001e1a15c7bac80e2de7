@@ -1,0 +1,25 @@
+package com.project.shop.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.project.shop.domain.MemberFormDTO;
+import com.project.shop.service.MemberService;
+
+import lombok.RequiredArgsConstructor;
+
+@RequestMapping("/members")
+@Controller
+@RequiredArgsConstructor
+public class MemberController {
+
+	private final MemberService memberService;
+	
+	@GetMapping(value="/new")
+	public String memberForm(Model model) {
+		model.addAttribute("memberFormDto", new MemberFormDTO());
+		return "member/memberForm";
+	}
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.yltraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}" lang="ko-kr">
+<head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+	<h1>상품 데이터 출력 예제</h1>
+	<div>
+		상품명 : <sapn th:text="${itemDto.itemName}"></sapn>
+	</div>
+	<div>
+		상품상세설명 : <sapn th:text="${itemDto.itemDetail}"></sapn>
+	</div>
+	<div>
+		상품등록일 : <sapn th:text="${itemDto.regTime}"></sapn>
+	</div>
+	<div>
+		상품가격 : <sapn th:text="${itemDto.price}"></sapn>
+	</div>
+</body>
+</html>
